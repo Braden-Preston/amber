@@ -11,7 +11,7 @@ import PasswordForgetPage from './Forgot';
 import HomePage from './Home';
 import AccountPage from './Account';
 
-import * as ROUTES from '../constants/routes';
+import * as routes from '../constants/routes';
 
 class App extends Component {
     constructor(props) {
@@ -37,12 +37,12 @@ class App extends Component {
                 <Router>
                     <React.Fragment>
                         <Navigation authUser={authUser}/>
-                        <Route exact path={ROUTES.LANDING} component={LandingPage} />
-                        <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
-                        <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
-                        <Route exact path={ROUTES.FORGOT} component={PasswordForgetPage} />
-                        <Route exact path={ROUTES.HOME} component={HomePage} />
-                        <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
+                        <Route exact path={routes.ROOT} component={LandingPage} />
+                        <Route exact path={routes.SIGN_UP} component={SignUpPage} />
+                        <Route exact path={routes.SIGN_IN} component={SignInPage} />
+                        <Route exact path={routes.FORGOT} component={PasswordForgetPage} />
+                        <Route exact path={routes.DASHBOARD} component={HomePage} />
+                        <Route exact path={routes.ACCOUNT} component={AccountPage} />
                     </React.Fragment>
                 </Router>
             </div>

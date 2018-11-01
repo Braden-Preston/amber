@@ -1,2 +1,2 @@
-# amber
+# Amber
 Freelance management app for handymen.

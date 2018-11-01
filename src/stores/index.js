@@ -5,13 +5,13 @@ import UserStore from './user';
 
 configure({ enforceActions: true });
 
-class RootStore {
+class MobxStore {
   constructor() {
     this.sessionStore = new SessionStore(this);
     this.userStore = new UserStore(this);
   }
 }
 
-const mobxStore = new RootStore();
+const mobxStore = new MobxStore();
 
 export default mobxStore;

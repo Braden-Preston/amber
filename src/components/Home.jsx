@@ -2,6 +2,8 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 
+import Zoom from '@material-ui/core/Zoom';
+
 class Home extends React.Component {
 
     constructor() {
