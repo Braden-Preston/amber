@@ -38,7 +38,7 @@ class SignUpForm extends Component {
         auth.createUser(email, passwordOne)
             .then(authUser => {
                 this.setState({ ...INITIAL_STATE });
-                history.push(routes.DASHBOARD);
+                // history.push(routes.DASHBOARD);
             })
             .catch(error => {
                 this.setState(byPropKey('error', error));
@@ -94,13 +94,13 @@ const SignUpLink = () =>
     <p>
         Don't have an account?
     {' '}
-        <Link to={routes.SIGN_UP}>Sign Up</Link>
+        <Link to={'/register'}>Sign Up</Link>
     </p>
 
 
 const SignUpPage = ({ ...props }) =>
     <div>
-        <h1>Sign Up</h1>
+        <h1>Register</h1>
         <SignUpForm {...props}/>
     </div>
 export default withRouter(SignUpPage)

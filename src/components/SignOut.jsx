@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
+import * as routes from '../constants/routes';
+
 import { auth } from '../firebase';
 
 const SignOutButton = () =>
@@ -7,6 +10,7 @@ const SignOutButton = () =>
         type="button"
         onClick={auth.signOut}
     >
+        <Redirect to={routes.ROOT} />
         Sign Out
   </button>
 
