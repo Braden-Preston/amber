@@ -24,7 +24,7 @@ const styles = {
 class Amber extends Component {
     render() {
         const { classes, match } = this.props
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div className={classes.root}>
                 <Particles />
