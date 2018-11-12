@@ -1,0 +1,75 @@
+/* Fade */
+
+.fade-enter {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.fade-enter.fade-enter-active {
+    visibility: visible;
+    opacity: 1;
+    transition: all 220ms ease-in-out;
+}
+
+.fade-exit {
+    visibility: visible;
+    opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+    opacity: 0;
+    transition: all 220ms ease-in-out;
+    visibility: hidden;
+}
+
+/* Slide */
+
+.slide-enter {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    left: 100%;
+}
+
+.slide-enter.slide-enter-active {
+    left: 0%;
+    transition: left 300ms ease-in;
+}
+
+.slide-exit.slide-exit-active {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    left: -100%;
+}
+
+.slide-exit {
+    transition: left 300ms ease-in;
+    left: 0%;
+}
+
+/* Card */
+
+.card-enter {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    top: 100%;
+}
+
+.card-enter.card-enter-active {
+    top: 0%;
+    transition: all 1500ms ease-in;
+}
+
+.card-exit {
+    transition: all 1500ms ease-in;
+    top: 0%;
+}
+
+.card-exit.card-exit-active {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    top: -100%;
+}

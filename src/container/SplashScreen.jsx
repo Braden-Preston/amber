@@ -10,7 +10,6 @@ import Navigation from './Navigation';
 import LandingPage from './Landing';
 import SignUpPage from './SignUp';
 import SignInPage from './SignIn';
-import PasswordForgetPage from './Forgot';
 import AccountPage from './Account';
 import SignOutButton from './SignOut';
 import Zoom from '@material-ui/core/Zoom';
@@ -68,13 +67,13 @@ class SplashScreen extends React.Component {
                 {dialogShow && (
                     <Card className={classes.card} visible={dialogShow}>
                         {/* <CardContent> */}
-                            <Route path={'/login'} component={SignInPage} />
+                            <Route exact path={'/login'} component={SignInPage} />
                             <Route path={'/register'} component={SignUpPage} />
                         {/* </CardContent> */}
                     </Card>
                 )}
                 {/* <Route  path={routes.FORGOT} component={PasswordForgetPage} /> */}
-                {/* <Route  path={routes.DASHBOARD} component={LandingPage} /> */}
+                <Route path={routes.DASHBOARD} component={LandingPage} />
             </div>
         )
     }

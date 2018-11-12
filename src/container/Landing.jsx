@@ -7,6 +7,7 @@ import Zoom from '@material-ui/core/Zoom';
 
 class LandingPage extends React.Component {
     render() {
+        console.log(this.props)
         return (
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
