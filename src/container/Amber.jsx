@@ -11,6 +11,7 @@ import {
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import SignIn from './SignIn';
 import Particles from '../presentation/Particles';
+import Account from './Account'
 
 const styles = {
     root: {
@@ -24,12 +25,15 @@ const styles = {
 class Amber extends Component {
     render() {
         const { classes, match } = this.props
-        // console.log(this.props)
+        // for (let index = 0; index < 70000; index++) { const element = Math.random(index); console.log(element) } // slow down
         return (
             <div className={classes.root}>
-                <Particles />
+                <Particles id="particles" />
+                {/* <h1><Link to={`${match.path}/dashboard`}>Amber</Link></h1> */}
                 <SignIn/>
 
+                
+                <Route exact path={`${match.path}/dashboard`} component={Account} />
                 {/* <TransitionGroup>
                     <CSSTransition key={location.key} classNames="fade" >
                         <Switch location={location}>

@@ -5,6 +5,7 @@ import Particles from 'react-particles-js';
 const styles = {
     root: {
         height: '100vh !important',
+        zIndex: -1,
     },
 };
 
@@ -18,7 +19,7 @@ class Bubbling extends React.Component {
                 params={{
                     "particles": {
                         "number": {
-                            "value": `${window.innerWidth / 1920 * 455 }`,
+                            "value": `${window.innerWidth / 1920 * 455}`,
                             "density": {
                                 "enable": true,
                                 "value_area": 2446.3576890600452
@@ -128,9 +129,9 @@ class Bubbling extends React.Component {
                 style={{
                     position: 'absolute',
                     left: 0,
-    width: '100%',
-    background: 'linear-gradient(152deg, #f7b655 10%, #ff983d 51%, #a73906 100%)',
-    height: '100vh !important',
+                    width: '100%',
+                    background: 'linear-gradient(152deg, #f7b655 10%, #ff983d 51%, #a73906 100%)',
+                    height: '100vh !important',
                 }}
             />
         )
