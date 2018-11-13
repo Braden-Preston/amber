@@ -12,6 +12,7 @@ class LandingPage extends React.Component {
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>  Edit <code>src/App.js</code> and save to reload. </p>
+                <p>This is a test deploy via Netlify</p>
                 <Zoom in={true} timeout={3000}>
                     <a
                         className="App-link"
