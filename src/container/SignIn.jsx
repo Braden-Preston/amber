@@ -25,7 +25,7 @@ import {
 } from 'react-router-dom'
 
 import Icon from '../media/firebase_icon.png'
-import { Paper } from '@material-ui/core';
+import { Paper, Zoom, Grow } from '@material-ui/core';
 
 const styles = theme => ({
     root: {
@@ -130,47 +130,49 @@ class SignInForm extends Component {
         const { email, password, error, } = this.state;
         const { classes } = this.props
         return (
-            <div id="SignIn" className={classes.root} onClick={this.closeLogin}>
-                <Paper className={classes.paper}>
-                    <form onSubmit={this.onSubmit}>
-                        <img className={classes.icon} src={Icon} />
-                        <TextField
-                            className={classes.textField}
-                            // autoComplete="username"
-                            fullWidth
-                            label="Email"
-                            type="email"
-                            onChange={event => this.setState(byPropKey('email', event.target.value))}
-                            value={email}
-                            margin="normal"
-                            variant="outlined"
-                        />
-                        <TextField
-                            className={classes.textField}
-                            // autoComplete="password"
-                            fullWidth
-                            // id="outlined-adornment-password"
-                            // className={classNames(classes.margin, classes.textField)}
-                            variant="outlined"
-                            type={this.state.showPassword ? 'text' : 'password'}
-                            label="Password"
-                            value={password}
-                            // onChange={this.handleChange('password')}
-                            onChange={event => this.setState(byPropKey('password', event.target.value))}
-                        />
-                        <Button
-                            // fullWidth
-                            className={classes.submitButton}
-                            color="secondary"
-                            variant="extendedFab"
-                            type="submit"
-                        >Sign In</Button>
-                        {error && <p>{error.message}</p>}
-                        <SignUpLink />
-                    {/* <Route path='/login/amber' render={() => (<div style={{ position: 'absolute', width: '100%', top: 250, zIndex: 2, background: 'teal' }}> <h1>Dashboard</h1> </div>)} /> */}
-                    </form>
-                </Paper>
-            </div>
+            <Grow in>
+                <div id="SignIn" className={classes.root} onClick={this.closeLogin}>
+                    <Paper className={classes.paper}>
+                        <form onSubmit={this.onSubmit}>
+                            <img className={classes.icon} src={Icon} />
+                            <TextField
+                                className={classes.textField}
+                                // autoComplete="username"
+                                fullWidth
+                                label="Email"
+                                type="email"
+                                onChange={event => this.setState(byPropKey('email', event.target.value))}
+                                value={email}
+                                margin="normal"
+                                variant="outlined"
+                            />
+                            <TextField
+                                className={classes.textField}
+                                // autoComplete="password"
+                                fullWidth
+                                // id="outlined-adornment-password"
+                                // className={classNames(classes.margin, classes.textField)}
+                                variant="outlined"
+                                type={this.state.showPassword ? 'text' : 'password'}
+                                label="Password"
+                                value={password}
+                                // onChange={this.handleChange('password')}
+                                onChange={event => this.setState(byPropKey('password', event.target.value))}
+                            />
+                            <Button
+                                // fullWidth
+                                className={classes.submitButton}
+                                color="secondary"
+                                variant="extendedFab"
+                                type="submit"
+                            >Sign In</Button>
+                            {error && <p>{error.message}</p>}
+                            <SignUpLink />
+                            {/* <Route path='/login/amber' render={() => (<div style={{ position: 'absolute', width: '100%', top: 250, zIndex: 2, background: 'teal' }}> <h1>Dashboard</h1> </div>)} /> */}
+                        </form>
+                    </Paper>
+                </div>
+            </Grow>
         );
     }
 }

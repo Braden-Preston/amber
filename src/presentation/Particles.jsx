@@ -10,6 +10,7 @@ const styles = {
 };
 
 class Bubbling extends React.Component {
+    shouldComponentUpdate = (nextProps, nextState) => false
 
     render() {
         console.log(window.innerWidth)
