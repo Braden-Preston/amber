@@ -1,17 +1,7 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Switch,
-    Redirect,
-    withRouter
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Switch, Redirect, withRouter } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Loadable from "react-loadable";
 
 // const Landing = Loadable({ loader: () => import("./Landing"), loading: () => { return (<h1>Loading</h1>) }, timeout: 250 });
@@ -58,8 +48,6 @@ const RoutedApp = withRouter(({ location }) => (
         <Switch location={location}>
             <Route exact path="/" component={Landing} />
             <Route path="/amber" component={Amber} />
-            {/* <Route path="/wp-admin" render={() => (<Redirect to="/admin" />)} /> */}
-            {/* <Route render={()=>(<h1>404 Redirect</h1>)} /> */}
         </Switch>
     </main>
     // <main className="App">

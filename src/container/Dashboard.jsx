@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
         let path = this.props.location.pathname
         let route = '/dashboard'
         let toggle = path == route
-        console.log(toggle)
+        // console.log(toggle)
         return (
             <Fragment>
                 <Switch checked={checked} onChange={this.handleChange} aria-label="Collapse" />
