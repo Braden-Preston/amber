@@ -7,9 +7,9 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 
 ReactDOM.render(
-    <Provider { ...store }>
-        <App />
-    </Provider>, 
+    // <Provider>
+        <App />,
+    // </Provider>, 
     document.getElementById('root')
 );
 

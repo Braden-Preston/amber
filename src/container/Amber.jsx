@@ -11,35 +11,27 @@ import {
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import SignIn from './SignIn';
 import Particles from '../presentation/Particles';
-import Dashboard from './Dashboard'
+import DashboardContainer from './DashboardContainer';
+
 
 const styles = {
     root: {
-        // background: 'orange',
-        height: '100vh',
-        width: '100vw',
-        // css atrributes
+        // height: '100vh',
+        // width: '100vw',
     },
     particles: {
-        zIndex: -99,
+        zIndex: '-99 !important',
     }
 };
 
 class Amber extends Component {
-    state = { mount: true }
-    
-    componentDidUpdate = (prevProps, prevState, snapshot) => {
-
-    }
-
     render() {
         const { classes, match } = this.props
-        // for (let index = 0; index < 70000; index++) { const element = Math.random(index); console.log(element) } // slow down
         return (
             <div className={classes.root}>
-                {this.state.mount && <Particles id="particles" className={classes.particles} />}
+                <Particles id="particles" className={classes.particles} />
                 <Route path="/amber/login" component={SignIn} />
-                <Route path="/amber/dashboard" component={Dashboard} />
+                <Route path="/amber/dashboard" component={DashboardContainer} />
             </div>
         )
     }

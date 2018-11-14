@@ -48,6 +48,7 @@ const RoutedApp = withRouter(({ location }) => (
         <Switch location={location}>
             <Route exact path="/" component={Landing} />
             <Route path="/amber" component={Amber} />
+            <Route render={() => (<Fragment><h1>404</h1><h4>Page not found.</h4></Fragment>)} />
         </Switch>
     </main>
     // <main className="App">

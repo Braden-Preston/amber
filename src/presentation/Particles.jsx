@@ -1,13 +1,5 @@
 import React, { Fragment } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import Particles from 'react-particles-js';
-
-const styles = {
-    root: {
-        height: '100vh !important',
-        zIndex: -1,
-    },
-};
 
 class ParticleScreen extends React.Component {
 
@@ -15,13 +7,14 @@ class ParticleScreen extends React.Component {
 
     render() {
         return (
-            <ParticleComp />
+            <div id="Particles">
+                <ParticleComp />
+            </div>
         )
     }
 }
 
-export default withStyles(styles)(ParticleScreen);
-
+export default ParticleScreen;
 
 const ParticleComp = () => (
     <Particles
@@ -136,11 +129,11 @@ const ParticleComp = () => (
             "retina_detect": true
         }}
         style={{
-            position: 'absolute',
-            left: 0,
+            zIndex: '-1 !important', position: 'absolute',
             width: '100%',
+            height: '100%',
             background: 'linear-gradient(152deg, #f7b655 10%, #ff983d 51%, #a73906 100%)',
-            height: '100vh !important',
+            left: 0
         }}
     />
 )
