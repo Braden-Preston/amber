@@ -4,17 +4,107 @@ import { compose } from 'recompose'
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles'
 import { Button, Zoom } from '@material-ui/core';
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import zIndex from '@material-ui/core/styles/zIndex';
 
-const styles = {
+const drawerWidth = 240;
+
+const styles = theme => ({
     root: {
-        // css atrributes
+        display: 'flex',
+        height: '100vh',
+        overflow: 'hidden',
     },
-}
+    appBar: {
+        zIndex: 1201,
+        // width: `calc(100% - ${drawerWidth}px)`,
+        // marginLeft: drawerWidth,
+    },
+    drawer: {
+        flexShrink: 0,
+        width: 55,
+        [theme.breakpoints.up('sm')]: {
+            width: 180,
+        },
+        [theme.breakpoints.up('md')]: {
+            width: 240,
+        },
+
+    },
+    drawerPaper: {
+        width: 55,
+        background: '#2f3a4c',
+        [theme.breakpoints.up('sm')]: {
+            width: 180,
+        },
+        [theme.breakpoints.up('md')]: {
+            width: 240,
+        },
+    },
+    toolbar: theme.mixins.toolbar,
+    content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing.unit * 3,
+        overflow: 'scroll',
+        background: '#edeef0 !important',
+    },
+    headerToolbar: {
+        background: '#fff',
+        paddingLeft: 0,
+    },
+    appLogo: {
+        width: 55,
+        background: theme.palette.secondary.main,
+        [theme.breakpoints.up('sm')]: {
+            width: 180,
+        },
+        [theme.breakpoints.up('md')]: {
+            width: 240,
+        },
+    },
+    breadcrumb: {
+        paddingLeft: 16,
+    }
+
+
+});
 
 // Main Class
 const Dashboard = ({ classes, store }) => (
     <Zoom in>
-        <Button>Dashboard</Button>
+        <div className={classes.root}>
+            <CssBaseline />
+            <AppBar position="fixed" color="secondary" className={classes.appBar}>
+                <Toolbar className={classes.headerToolbar}>
+                    <Toolbar className={classes.appLogo}></Toolbar>
+                    <Typography component="h1" variant="h6" className={classes.breadcrumb} noWrap >Dashboard</Typography>
+                </Toolbar>
+            </AppBar>
+            <Drawer className={classes.drawer} variant="permanent" classes={{ paper: classes.drawerPaper, }} anchor="left" >
+                <div className={classes.toolbar} />
+                <Divider />
+                <List> {['Clients', 'Invoices', 'Navigate', 'Services', 'Records', 'Budget'].map((text, index) => (
+                    <ListItem button key={text}> <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> <ListItemText primary={text} /> </ListItem>
+                ))} </List>
+            </Drawer>
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                <Typography paragraph> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac. </Typography>
+                <Typography paragraph> Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a. </Typography>
+            </main>
+        </div>
     </Zoom>
 )
 

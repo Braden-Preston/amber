@@ -167,8 +167,6 @@ class SignInForm extends Component {
                                 type="submit"
                             >Sign In</Button>
                             {error && <p>{error.message}</p>}
-                            <SignUpLink />
-                            {/* <Route path='/login/amber' render={() => (<div style={{ position: 'absolute', width: '100%', top: 250, zIndex: 2, background: 'teal' }}> <h1>Dashboard</h1> </div>)} /> */}
                         </form>
                     </Paper>
                 </div>
