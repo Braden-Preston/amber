@@ -39,7 +39,7 @@ class App extends Component {
 const RoutedApp = withRouter(({ location }) => (
     <main className="App">
         <ul style={{
-            position: 'fixed', top: 0, zIndex: 9999, right: 20, padding: 20, borderRadius: 4, boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)', listStylePosition: "inside", background: 'lightgrey' }}>
+            position: 'fixed', bottom: 0, zIndex: 9999, right: 20, padding: 20, borderRadius: 4, boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)', listStylePosition: "inside", background: 'lightgrey' }}>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/amber">Amber</Link></li>
             <li><Link to="/amber/login">Login</Link></li>

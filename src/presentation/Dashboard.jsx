@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, Component } from 'react'
 import { observer } from 'mobx-react'
 import { compose } from 'recompose'
 import classNames from 'classnames';
@@ -17,6 +17,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import zIndex from '@material-ui/core/styles/zIndex';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const drawerWidth = 240;
 
@@ -76,37 +80,112 @@ const styles = theme => ({
     },
     breadcrumb: {
         paddingLeft: 16,
-    }
-
+    },
+    accordianRoot: {
+        width: '100%',
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        // flexBasis: '33.33%',
+        // flexShrink: 0,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+    },
+    secondaryHeading: {
+        fontSize: theme.typography.pxToRem(15),
+        color: theme.palette.text.secondary,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        [theme.breakpoints.down('sm')]: {
+            paddingLeft: 16,
+            width: 180,
+        },
+    },
 
 });
 
+
+
 // Main Class
-const Dashboard = ({ classes, store }) => (
-    <Zoom in>
-        <div className={classes.root}>
-            <CssBaseline />
-            <AppBar position="fixed" color="secondary" className={classes.appBar}>
-                <Toolbar className={classes.headerToolbar}>
-                    <Toolbar className={classes.appLogo}></Toolbar>
-                    <Typography component="h1" variant="h6" className={classes.breadcrumb} noWrap >Dashboard</Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer className={classes.drawer} variant="permanent" classes={{ paper: classes.drawerPaper, }} anchor="left" >
-                <div className={classes.toolbar} />
-                <Divider />
-                <List> {['Clients', 'Invoices', 'Navigate', 'Services', 'Records', 'Budget'].map((text, index) => (
-                    <ListItem button key={text}> <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> <ListItemText primary={text} /> </ListItem>
-                ))} </List>
-            </Drawer>
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <Typography paragraph> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac. </Typography>
-                <Typography paragraph> Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a. </Typography>
-            </main>
-        </div>
-    </Zoom>
-)
+class Dashboard extends Component {
+    state = {
+        expanded: null,
+    };
+
+    handleChange = panel => (event, expanded) => {
+        this.setState({
+            expanded: expanded ? panel : false,
+        });
+    };
+
+    render() {
+        const { classes, store } = this.props
+        const { expanded } = this.state;
+
+        const customers = [
+            {
+                id: "4DE8H3S5H8R4H6D2T8487",
+                name: 'Bob Billybob',
+                description: 'Clean out sink and hang up picture in the living room.'
+            },
+            {
+                id: "R55KI57595R4JF5ER45RTJ",
+                name: 'Mary Mento',
+                description: 'Garage needs cleaned and organized. Be wary of dog!'
+            },
+            {
+                id: "ZZERT71561K5YLKDRTK65F",
+                name: 'Serverus Snap',
+                description: 'The potions closet is overgrown with weeds, pull them.'
+            },
+            {
+                id: "AE4JR84DJRR654K8U46SF",
+                name: 'Moldy Goldy',
+                description: 'Sink needs drained, also need to clean cat box.'
+            }
+        ]
+
+        return (
+            <Zoom in>
+                <div className={classes.root}>
+                    <CssBaseline />
+                    <AppBar position="fixed" color="secondary" className={classes.appBar}>
+                        <Toolbar className={classes.headerToolbar}>
+                            <Toolbar className={classes.appLogo}></Toolbar>
+                            <Typography component="h1" variant="h6" className={classes.breadcrumb} noWrap >Dashboard</Typography>
+                        </Toolbar>
+                    </AppBar>
+                    <Drawer className={classes.drawer} variant="permanent" classes={{ paper: classes.drawerPaper, }} anchor="left" >
+                        <div className={classes.toolbar} />
+                        <Divider />
+                        <List> {['Clients', 'Invoices', 'Navigate', 'Services', 'Records', 'Budget'].map((text, index) => (
+                            <ListItem button key={text}> <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> <ListItemText primary={text} /> </ListItem>
+                        ))} </List>
+                    </Drawer>
+                    <main className={classes.content}>
+                        <div className={classes.toolbar} />
+                        <div className={classes.accordianRoot}>
+                            {customers.map((customer, index) => (
+                                <ExpansionPanel key={index} expanded={expanded === customer.id} onChange={this.handleChange(customer.id)}>
+                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                        <Typography className={classes.heading}>{customer.name}</Typography>
+                                        <Typography noWrap className={classes.secondaryHeading}>{customer.description}</Typography>
+                                    </ExpansionPanelSummary>
+                                    <ExpansionPanelDetails>
+                                        <Typography> Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget maximus est, id dignissim quam. </Typography>
+                                    </ExpansionPanelDetails>
+                                </ExpansionPanel>
+                            ))}
+                        </div>
+                    </main>
+                </div>
+            </Zoom>
+        )
+    }
+
+}
 
 // Main Export
 export default compose(
