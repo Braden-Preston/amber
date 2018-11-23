@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import { compose } from 'recompose'
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles'
-import { Button, Zoom } from '@material-ui/core';
+import { Button, Zoom, ExpansionPanelActions, Avatar, Grid } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -16,11 +16,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import zIndex from '@material-ui/core/styles/zIndex';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+import ClientTable from './ClientTable';
 
 const drawerWidth = 240;
 
@@ -81,28 +78,28 @@ const styles = theme => ({
     breadcrumb: {
         paddingLeft: 16,
     },
-    accordianRoot: {
-        width: '100%',
-    },
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        // flexBasis: '33.33%',
-        // flexShrink: 0,
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-    },
-    secondaryHeading: {
-        fontSize: theme.typography.pxToRem(15),
-        color: theme.palette.text.secondary,
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        [theme.breakpoints.down('sm')]: {
-            paddingLeft: 16,
-            width: 180,
-        },
-    },
+    // accordianRoot: {
+    //     width: '100%',
+    // },
+    // heading: {
+    //     fontSize: theme.typography.pxToRem(15),
+    //     // flexBasis: '33.33%',
+    //     // flexShrink: 0,
+    //     whiteSpace: 'nowrap',
+    //     overflow: 'hidden',
+    //     textOverflow: 'ellipsis',
+    // },
+    // secondaryHeading: {
+    //     fontSize: theme.typography.pxToRem(15),
+    //     color: theme.palette.text.secondary,
+    //     whiteSpace: 'nowrap',
+    //     overflow: 'hidden',
+    //     textOverflow: 'ellipsis',
+    //     [theme.breakpoints.down('sm')]: {
+    //         paddingLeft: 16,
+    //         width: 180,
+    //     },
+    // },
 
 });
 
@@ -110,42 +107,9 @@ const styles = theme => ({
 
 // Main Class
 class Dashboard extends Component {
-    state = {
-        expanded: null,
-    };
-
-    handleChange = panel => (event, expanded) => {
-        this.setState({
-            expanded: expanded ? panel : false,
-        });
-    };
 
     render() {
         const { classes, store } = this.props
-        const { expanded } = this.state;
-
-        const customers = [
-            {
-                id: "4DE8H3S5H8R4H6D2T8487",
-                name: 'Bob Billybob',
-                description: 'Clean out sink and hang up picture in the living room.'
-            },
-            {
-                id: "R55KI57595R4JF5ER45RTJ",
-                name: 'Mary Mento',
-                description: 'Garage needs cleaned and organized. Be wary of dog!'
-            },
-            {
-                id: "ZZERT71561K5YLKDRTK65F",
-                name: 'Serverus Snap',
-                description: 'The potions closet is overgrown with weeds, pull them.'
-            },
-            {
-                id: "AE4JR84DJRR654K8U46SF",
-                name: 'Moldy Goldy',
-                description: 'Sink needs drained, also need to clean cat box.'
-            }
-        ]
 
         return (
             <Zoom in>
@@ -166,19 +130,7 @@ class Dashboard extends Component {
                     </Drawer>
                     <main className={classes.content}>
                         <div className={classes.toolbar} />
-                        <div className={classes.accordianRoot}>
-                            {customers.map((customer, index) => (
-                                <ExpansionPanel key={index} expanded={expanded === customer.id} onChange={this.handleChange(customer.id)}>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                        <Typography className={classes.heading}>{customer.name}</Typography>
-                                        <Typography noWrap className={classes.secondaryHeading}>{customer.description}</Typography>
-                                    </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails>
-                                        <Typography> Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget maximus est, id dignissim quam. </Typography>
-                                    </ExpansionPanelDetails>
-                                </ExpansionPanel>
-                            ))}
-                        </div>
+                        <ClientTable />
                     </main>
                 </div>
             </Zoom>

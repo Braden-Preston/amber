@@ -13,6 +13,7 @@ import '../anims.css'
 
 const theme = createMuiTheme({
     palette: {
+        // type: 'dark',
         primary: {
             main: '#ff9800',
         },
