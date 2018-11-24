@@ -88,6 +88,7 @@ const styles = theme => ({
     slice: {
         height: '100%',
         background: theme.palette.background.default,
+        background: '#f7f7f7',
     },
     paper: {
         boxSizing: 'border-box',
