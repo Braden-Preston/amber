@@ -105,10 +105,10 @@ const styles = theme => ({
     slice: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         flex: 1,
-        overflowY: 'scroll',
-        overflowX: 'hidden',
+        // overflowY: 'scroll',
+        // overflowX: 'hidden',
         background: theme.palette.background.default,
         background: '#f7f7f7',
         // border: '2px solid red !important',
