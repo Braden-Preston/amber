@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography, InputBase } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, InputBase, Paper } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -8,16 +8,15 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 const styles = theme => ({
     root: {
         position: 'relative',
-        width: '100%',
-        height: '100%',
-        border: '2px solid lime !important'
+        width: '100vw',
+        height: '100vh',
+        // border: '2px solid lime !important'
     },
     grow: {
         flexGrow: 1,
     },
     menuButton: {
         marginRight: -12,
-        marginLeft: 20,
     },
     title: {
         display: 'none',
@@ -64,7 +63,7 @@ const styles = theme => ({
         // width: (window.innerWidth - 168),
         width: 120,
         '&:focus': {
-            width: (window.innerWidth - 120),
+            width: 236,
         },
         [theme.breakpoints.up('sm')]: {
             width: 120,
@@ -73,6 +72,30 @@ const styles = theme => ({
             },
         },
     },
+    appBar: {
+        position: 'relative',
+        // border: '2px solid lime !important'
+    },
+    sliceBox: {
+        // position: 'relative',
+        height: 'inherit',
+        // border: '2px solid magenta !important',
+    },
+    header: {
+        height: 250,
+        background: 'rgba(0,140,255,0.7)'
+    },
+    slice: {
+        height: '100%',
+        background: theme.palette.background.default,
+    },
+    paper: {
+        boxSizing: 'border-box',
+        position: 'absolute',
+        padding: theme.spacing.unit * 2,
+        margin: theme.spacing.unit * 2,
+        width: 'calc(100vw - 32px)',
+    }
 });
 
 class Orders extends React.Component {
@@ -81,6 +104,7 @@ class Orders extends React.Component {
         return (
             <div id="Orders" className={classes.root}>
                 <ActionBar classes={classes} />
+                <SliceContainer classes={classes} />
             </div>
         )
     }
@@ -88,21 +112,13 @@ class Orders extends React.Component {
 
 export default withStyles(styles)(Orders);
 
-const ActionBar = ({classes}) => (
-    <AppBar position="static" color="secondary">
+const ActionBar = ({ classes }) => (
+    <AppBar position="static" color="secondary" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
             <div className={classes.grow} />
             <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                    <SearchIcon />
-                </div>
-                <InputBase
-                    placeholder="Search…"
-                    classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}
-                />
+                <div className={classes.searchIcon}> <SearchIcon /> </div>
+                <InputBase placeholder="Search…" classes={{ root: classes.inputRoot, input: classes.inputInput, }} />
             </div>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
                 <MenuIcon />
@@ -110,3 +126,36 @@ const ActionBar = ({classes}) => (
         </Toolbar>
     </AppBar>
 )
+
+const SliceContainer = ({ classes }) => (
+    <div className={classes.sliceBox}>
+        <SvgHeader classes={classes} />
+        <Slice classes={classes} />
+    </div>
+)
+
+const SvgHeader = ({ classes }) => (
+    <div className={classes.header}>
+        <Typography variant="h4" color="textSecondary">Orders</Typography>
+    </div>
+)
+
+const Slice = ({ classes }) => (
+    <div className={classes.slice}>
+        <PanelGroup classes={classes} />
+    </div>
+)
+
+const PanelGroup = ({ classes }) => (
+    <PanelSet classes={classes} />
+)
+
+const PanelSet = ({ classes }) => (
+    <Paper className={classes.paper} >
+        <p>Order 1</p> <hr />
+        <p>Order 2</p> <hr />
+        <p>Order 3</p>
+    </Paper >
+)
+
+
