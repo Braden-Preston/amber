@@ -6,6 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import ColorAvatar from '../presentation/ColorAvatar';
 import { StickyContainer, Sticky } from 'react-sticky';
+import Backdrop from '../media/backdrop.png'
 
 const styles = theme => ({
     root: {
@@ -31,7 +32,6 @@ const styles = theme => ({
     },
     canvas: {
         background: 'rgba(0,140,255,0.7)',
-        justifyContent: 'center',
         flexDirection: 'column',
         display: 'flex',
         height: 250,
@@ -129,6 +129,18 @@ const styles = theme => ({
         padding: theme.spacing.unit * 2,
         margin: theme.spacing.unit * 2,
         width: 'calc(100vw - 32px)',
+    },
+    svg: {
+        // position: 'absolute',
+        // top: '50%',
+        // transform: 'translateX(-50%)',
+        // zIndex: -1,
+    },
+    overlay: {
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 9999999,
     }
 });
 
@@ -172,7 +184,8 @@ const ActionBar = ({ classes }) => (
 
 const Canvas = ({ classes }) => (
     <div className={classes.canvas}>
-        <Typography variant="h4" color="textSecondary">Orders</Typography>
+        {/* <div classname={classes.overlay}><Typography variant="h4" color="textSecondary" >Orders</Typography></div> */}
+        <img classname={classes.svg} src={Backdrop} />
     </div>
 )
 
