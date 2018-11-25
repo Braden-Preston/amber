@@ -44,7 +44,7 @@ const RoutedApp = withRouter(({ location }) => (
             <li><Link to="/">Home</Link></li>
             <li><Link to="/amber">Amber</Link></li>
             <li><Link to="/amber/login">Login</Link></li>
-            <li><Link to="/amber/overview">Overview</Link></li>
+            <li><Link to="/amber/orders">Overview</Link></li>
         </ul>
         <Switch location={location}>
             <Route exact path="/" component={Landing} />
