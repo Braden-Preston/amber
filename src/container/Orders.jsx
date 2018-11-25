@@ -5,14 +5,50 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import ColorAvatar from '../presentation/ColorAvatar';
+import { StickyContainer, Sticky } from 'react-sticky';
 
 const styles = theme => ({
     root: {
+        flexDirection: 'column',
         position: 'relative',
-        width: '100vw',
+        overflow: 'hidden',
         height: '100vh',
-        // overflow: 'hidden',
-        // border: '2px solid yellow !important'
+        width: '100vw',
+        display: 'flex',
+    },
+    appBar: {
+        display: 'flex',
+        height: 56,
+    },
+    panel: {
+        justifyContent: 'center',
+        flexDirection: 'row',
+        overflowX: 'hidden',
+        overflowY: 'scroll',
+        flexWrap: 'wrap',
+        display: 'flex',
+        flex: 1,
+    },
+    canvas: {
+        background: 'rgba(0,140,255,0.7)',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        display: 'flex',
+        height: 250,
+        flex: 1,
+    },
+    sliceContainer: {
+
+        // display: 'flex',
+        // flexDirection: 'column',
+        // justifyContent: 'center',
+        // flex: 1,
+        // overflowY: 'scroll',
+        // overflowX: 'hidden',
+        background: theme.palette.background.default,
+        background: '#f7f7f7',
+        // height: '100%',
+        // border: '2px solid red !important',
     },
     grow: {
         flexGrow: 1,
@@ -86,33 +122,8 @@ const styles = theme => ({
         // overflowY: 'hidden',
         // overflowX: 'scroll',
     },
-    appBar: {
-        // maxHeight: 80,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        height: 56,
-        // border: '2px solid lime !important',
-    },
-    canvas: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        height: 250,
-        background: 'rgba(0,140,255,0.7)',
-        // border: '2px solid magenta !important',
-    },
-    slice: {
-        display: 'flex',
-        flexDirection: 'column',
-        // justifyContent: 'center',
-        flex: 1,
-        // overflowY: 'scroll',
-        // overflowX: 'hidden',
-        background: theme.palette.background.default,
-        background: '#f7f7f7',
-        // border: '2px solid red !important',
-    },
+
+
     paper: {
         position: 'realtive',
         padding: theme.spacing.unit * 2,
@@ -126,11 +137,15 @@ class Orders extends React.Component {
         const { classes } = this.props
         return (
             <div id="Orders" className={classes.root}>
-                <div id="Flex" className={classes.flex}>
-                    <ActionBar classes={classes} />
+                {/* <div id="Flex" className={classes.flex}> */}
+                <ActionBar classes={classes} />
+                {/* <div id="Flex" className={classes.flex}> */}
+                <div className={classes.panel}>
                     <Canvas classes={classes} />
                     <SliceContainer classes={classes} />
                 </div>
+                {/* </div> */}
+                {/* </div> */}
             </div>
         )
     }
@@ -162,7 +177,7 @@ const Canvas = ({ classes }) => (
 )
 
 const SliceContainer = ({ classes }) => (
-    <div className={classes.slice}>
+    <div className={classes.sliceContainer}>
         <SliceGroup classes={classes} />
         <SliceGroup classes={classes} />
         <SliceGroup classes={classes} />
