@@ -156,11 +156,13 @@ const styles = theme => ({
 
 class Orders extends React.Component {
     render() {
-        const { classes } = this.props
+        const { classes, store } = this.props
+        console.log(this.props)
+        console.log(store)
         return (
             <div id="Orders" className={classes.root}>
                 {/* <div id="Flex" className={classes.flex}> */}
-                <ActionBar classes={classes} />
+                <ActionBar classes={classes} store={store}/>
                 {/* <div id="Flex" className={classes.flex}> */}
                 <div className={classes.panel}>
                     <Canvas classes={classes} />
@@ -175,7 +177,7 @@ class Orders extends React.Component {
 
 export default withStyles(styles)(Orders);
 
-const ActionBar = ({ classes }) => (
+const ActionBar = ({ classes, store }) => (
     <div id="AppBar" className={classes.appBar}>
         <AppBar position="static" color="secondary">
             <Toolbar className={classes.toolbar}>
@@ -184,7 +186,7 @@ const ActionBar = ({ classes }) => (
                     <div className={classes.searchIcon}> <SearchIcon /> </div>
                     <InputBase placeholder="Search…" classes={{ root: classes.inputRoot, input: classes.inputInput, }} />
                 </div>
-                <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
+                <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer" onClick={() => { store.toggleBoolean("navigationVisible") }}>
                     <MenuIcon />
                 </IconButton>
             </Toolbar>

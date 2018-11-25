@@ -4,7 +4,7 @@ import SessionStore from './session';
 import UserStore from './user';
 import DashboardStore from './dashboard'
 
-configure({ enforceActions: true });
+configure({ enforceActions: "observed" })
 
 class MobxStore {
   constructor() {

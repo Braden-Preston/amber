@@ -19,15 +19,16 @@ class OrdersContainer extends Component {
         const { dashboardStore: store, ...rest } = this.props
         return (
             <main id="Orders">
-                <Route path="/amber/orders" component={Orders} />
-                <Route path="/amber/orders:idName" render={()=> <h1>NAME</h1>} />
+                <Orders store={store} />
+                {/* <Route path="/amber/orders" component={Orders} /> */}
+                {/* <Route path="/amber/orders:idName" render={()=> <h1>NAME</h1>} /> */}
             </main>
         )
     }
 }
 
 export default compose(
-    // inject('dashboardStore'),
+    inject('dashboardStore'),
     withStyles(styles),
     observer
 )(OrdersContainer);

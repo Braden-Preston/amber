@@ -4,7 +4,7 @@ import { observer } from 'mobx-react'
 import { compose } from 'recompose'
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles'
-import { Button, Zoom, ExpansionPanelActions, Avatar, Grid } from '@material-ui/core';
+import { Button, Zoom, ExpansionPanelActions, Avatar, Grid, ClickAwayListener } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -142,8 +142,7 @@ class Dashboard extends Component {
         const { navigationVisible } = this.state
         return (
             <div id="Dashboard">
-                <button onClick={()=>{this.setState({navigationVisible: !navigationVisible})}} style={{position: 'fixed', zIndex: 9,}}>Toggle</button>
-                <main id="Snapshot" className={classNames(classes.snapshot, navigationVisible && classes.snapshotActive)}>
+                <main id="Snapshot" className={classNames(classes.snapshot, store.navigationVisible && classes.snapshotActive)} >
                     <Switch location={location}>
                         <Route path="/amber/overview" render={() => (<h1>Overview</h1>)} />
                         <Route path="/amber/clients" render={() => (<h1>Clients</h1>)} />
@@ -154,7 +153,11 @@ class Dashboard extends Component {
                         <Route path="/amber/budget" render={() => (<h1>Budget</h1>)} />
                     </Switch>
                 </main>
-                <aside id="Naviagtion" className={classNames(classes.navigation, navigationVisible && classes.navigationActive)}>
+                {store.navigationVisible && <div id="ClickAway"
+                    style={{ width: 'calc(100vw - 250px)', height: '100vh', position: 'fixed' }}
+                    onClick={() => { store.toggleBoolean("navigationVisible") }}
+                />}
+                <aside id="Naviagtion" className={classNames(classes.navigation, store.navigationVisible && classes.navigationActive)} >
                     <li><Link to="/amber/overview">Overview</Link></li>
                     <li><Link to="/amber/clients">Clients</Link></li>
                     <li><Link to="/amber/orders">Orders</Link></li>

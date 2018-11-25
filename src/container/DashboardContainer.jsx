@@ -24,14 +24,8 @@ class DashboardContainer extends Component {
     }
 }
 
-// export {
-//     DashboardContainer,
-// };
-
-export default DashboardContainer
-
-// export default compose(
-//     // inject('dashboardStore'),
-//     withStyles(styles),
-//     observer
-// )(DashboardContainer);
+export default compose(
+    inject('dashboardStore'),
+    withStyles(styles),
+    observer
+)(DashboardContainer);
