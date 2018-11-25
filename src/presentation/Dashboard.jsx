@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from 'react'
+import { BrowserRouter as Router, Route, Link, Switch, Redirect, withRouter } from 'react-router-dom'
 import { observer } from 'mobx-react'
 import { compose } from 'recompose'
 import classNames from 'classnames';
@@ -18,6 +19,8 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
 import ClientTable from './ClientTable';
+
+import OrdersContainer from '../container/OrdersContainer';
 
 const drawerWidth = 240;
 
@@ -109,31 +112,41 @@ const styles = theme => ({
 class Dashboard extends Component {
 
     render() {
-        const { classes, store } = this.props
+        const { classes, store, location } = this.props
 
         return (
-            <Zoom in>
-                <div className={classes.root}>
-                    <CssBaseline />
-                    <AppBar position="fixed" color="secondary" className={classes.appBar}>
-                        <Toolbar className={classes.headerToolbar}>
-                            <Toolbar className={classes.appLogo}></Toolbar>
-                            <Typography component="h1" variant="h6" className={classes.breadcrumb} noWrap >Dashboard</Typography>
-                        </Toolbar>
-                    </AppBar>
-                    <Drawer className={classes.drawer} variant="permanent" classes={{ paper: classes.drawerPaper, }} anchor="left" >
-                        <div className={classes.toolbar} />
-                        <Divider />
-                        <List> {['Clients', 'Invoices', 'Navigate', 'Services', 'Records', 'Budget'].map((text, index) => (
-                            <ListItem button key={text}> <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> <ListItemText primary={text} /> </ListItem>
-                        ))} </List>
-                    </Drawer>
-                    <main className={classes.content}>
-                        <div className={classes.toolbar} />
-                        <ClientTable />
-                    </main>
-                </div>
-            </Zoom>
+            <Switch location={location}>
+                <Route path="/amber/overview" render={() => (<h1>Overview</h1>)} />
+                <Route path="/amber/clients" render={() => (<h1>Clients</h1>)} />
+                <Route path="/amber/orders" component={OrdersContainer} />
+                <Route path="/amber/navigate" render={() => (<h1>Navigate</h1>)} />
+                <Route path="/amber/services" render={() => (<h1>Services</h1>)} />
+                <Route path="/amber/records" render={() => (<h1>Records</h1>)} />
+                <Route path="/amber/budget" render={() => (<h1>Budget</h1>)} />
+            </Switch>
+
+            // <Zoom in>
+            //     <div className={classes.root}>
+            //         <CssBaseline />
+            //         <AppBar position="fixed" color="secondary" className={classes.appBar}>
+            //             <Toolbar className={classes.headerToolbar}>
+            //                 <Toolbar className={classes.appLogo}></Toolbar>
+            //                 <Typography component="h1" variant="h6" className={classes.breadcrumb} noWrap >Dashboard</Typography>
+            //             </Toolbar>
+            //         </AppBar>
+            //         <Drawer className={classes.drawer} variant="permanent" classes={{ paper: classes.drawerPaper, }} anchor="left" >
+            //             <div className={classes.toolbar} />
+            //             <Divider />
+            //             <List> {['Clients', 'Invoices', 'Navigate', 'Services', 'Records', 'Budget'].map((text, index) => (
+            //                 <ListItem button key={text}> <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> <ListItemText primary={text} /> </ListItem>
+            //             ))} </List>
+            //         </Drawer>
+            //         <main className={classes.content}>
+            //             <div className={classes.toolbar} />
+            //             <ClientTable />
+            //         </main>
+            //     </div>
+            // </Zoom>
         )
     }
 

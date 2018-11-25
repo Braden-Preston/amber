@@ -31,7 +31,7 @@ class Amber extends Component {
             <div className={classes.root}>
                 <Particles id="particles" className={classes.particles} />
                 <Route path="/amber/login" component={SignIn} />
-                <Route path="/amber/dashboard" component={DashboardContainer} />
+                <Route path="/amber/" component={DashboardContainer} />
             </div>
         )
     }

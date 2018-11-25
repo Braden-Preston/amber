@@ -16,6 +16,7 @@ const styles = theme => ({
         height: '100vh',
         width: '100vw',
         display: 'flex',
+        zIndex: 1,
     },
     appBar: {
         display: 'flex',
@@ -28,6 +29,7 @@ const styles = theme => ({
         overflowY: 'scroll',
         flexWrap: 'wrap',
         display: 'flex',
+        zIndex: 1,
         flex: 1,
     },
     canvas: {
@@ -35,6 +37,7 @@ const styles = theme => ({
         flexDirection: 'column',
         display: 'flex',
         height: 250,
+        zIndex: 1,
         flex: 1,
     },
     sliceContainer: {
@@ -137,9 +140,16 @@ const styles = theme => ({
         // zIndex: -1,
     },
     overlay: {
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateX(-50%)',
+        // display: 'flex',
+        position: 'relative',
+        // display: 'block',
+        height: 100,
+        width: 100,
+        background: 'grey !important',
+        border: '2px solid red !important',
+        // position: 'absolute',
+        // top: '50%',
+        // transform: 'translateX(-50%)',
         zIndex: 9999999,
     }
 });
@@ -178,13 +188,13 @@ const ActionBar = ({ classes }) => (
                     <MenuIcon />
                 </IconButton>
             </Toolbar>
-        </AppBar>
+        </AppBar> 
     </div>
 )
 
 const Canvas = ({ classes }) => (
     <div className={classes.canvas}>
-        {/* <div classname={classes.overlay}><Typography variant="h4" color="textSecondary" >Orders</Typography></div> */}
+        {/* <Typography variant="h4" color="textSecondary" >Orders</Typography> */}
         <img classname={classes.svg} src={Backdrop} />
     </div>
 )

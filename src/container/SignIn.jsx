@@ -107,7 +107,7 @@ class SignInForm extends Component {
             .then(() => {
                 console.log("TEST")
                 this.setState({ ...this.state });
-                history.push(routes.DASHBOARD);
+                history.push('/amber/orders');
             })
             .catch(error => {
                 this.setState(byPropKey('error', error));
