@@ -103,6 +103,29 @@ const styles = theme => ({
     //         width: 180,
     //     },
     // },
+    snapshot: {
+        position: 'absolute',
+        left: 0,
+        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 100ms',
+        border: '1px solid dodgerblue',
+    },
+    snapshotActive: {
+        left: '-70vw',
+        transform: 'scale(0.9)',
+        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) ',
+    },
+    navigation: {
+        position: 'absolute',
+        height: '100vh',
+        right: -250,
+        width: 250,
+        background: 'lightgrey',
+        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) ',
+    },
+    navigationActive: {
+        right: 0,
+        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 100ms ',
+    }
 
 });
 
@@ -110,20 +133,38 @@ const styles = theme => ({
 
 // Main Class
 class Dashboard extends Component {
+    state = {
+        navigationVisible: false
+    }
 
     render() {
         const { classes, store, location } = this.props
-
+        const { navigationVisible } = this.state
         return (
-            <Switch location={location}>
-                <Route path="/amber/overview" render={() => (<h1>Overview</h1>)} />
-                <Route path="/amber/clients" render={() => (<h1>Clients</h1>)} />
-                <Route path="/amber/orders" component={OrdersContainer} />
-                <Route path="/amber/navigate" render={() => (<h1>Navigate</h1>)} />
-                <Route path="/amber/services" render={() => (<h1>Services</h1>)} />
-                <Route path="/amber/records" render={() => (<h1>Records</h1>)} />
-                <Route path="/amber/budget" render={() => (<h1>Budget</h1>)} />
-            </Switch>
+            <div id="Dashboard">
+                <button onClick={()=>{this.setState({navigationVisible: !navigationVisible})}} style={{position: 'fixed', zIndex: 9,}}>Toggle</button>
+                <main id="Snapshot" className={classNames(classes.snapshot, navigationVisible && classes.snapshotActive)}>
+                    <Switch location={location}>
+                        <Route path="/amber/overview" render={() => (<h1>Overview</h1>)} />
+                        <Route path="/amber/clients" render={() => (<h1>Clients</h1>)} />
+                        <Route path="/amber/orders" component={OrdersContainer} />
+                        <Route path="/amber/navigate" render={() => (<h1>Navigate</h1>)} />
+                        <Route path="/amber/services" render={() => (<h1>Services</h1>)} />
+                        <Route path="/amber/records" render={() => (<h1>Records</h1>)} />
+                        <Route path="/amber/budget" render={() => (<h1>Budget</h1>)} />
+                    </Switch>
+                </main>
+                <aside id="Naviagtion" className={classNames(classes.navigation, navigationVisible && classes.navigationActive)}>
+                    <li><Link to="/amber/overview">Overview</Link></li>
+                    <li><Link to="/amber/clients">Clients</Link></li>
+                    <li><Link to="/amber/orders">Orders</Link></li>
+                    <li><Link to="/amber/navigate">Navigate</Link></li>
+                    <li><Link to="/amber/services">Services</Link></li>
+                    <li><Link to="/amber/records">Records</Link></li>
+                    <li><Link to="/amber/budget">Budget</Link></li>
+                    <li><Link to="/amber/settings">Budget</Link></li>
+                </aside>
+            </div>
 
             // <Zoom in>
             //     <div className={classes.root}>

@@ -218,10 +218,7 @@ const SliceGroup = ({ classes }) => (
 
 const Slice = ({ classes }) => (
     <Paper className={classes.paper} >
-        <ColorAvatar initials="BP" />
-        <p> Order 1 </p> <hr />
-        <p>Order 2</p> <hr />
-        <p>Order 3</p>
+        <p><ColorAvatar initials="BP" /> Order 1 </p>
     </Paper >
 )
 

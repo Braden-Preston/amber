@@ -45,12 +45,6 @@ const RoutedApp = withRouter(({ location }) => (
             <li><Link to="/amber">Amber</Link></li>
             <li><Link to="/amber/login">Login</Link></li>
             <li><Link to="/amber/overview">Overview</Link></li>
-            <li><Link to="/amber/clients">Clients</Link></li>
-            <li><Link to="/amber/orders">Orders</Link></li>
-            <li><Link to="/amber/navigate">Navigate</Link></li>
-            <li><Link to="/amber/services">Services</Link></li>
-            <li><Link to="/amber/records">Records</Link></li>
-            <li><Link to="/amber/budget">Budget</Link></li>
         </ul>
         <Switch location={location}>
             <Route exact path="/" component={Landing} />

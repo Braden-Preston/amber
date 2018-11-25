@@ -26,10 +26,11 @@ const styles = {
 
 class Amber extends Component {
     render() {
-        const { classes, match } = this.props
+        const { classes, match, location } = this.props
+        console.log(location)
         return (
             <div className={classes.root}>
-                <Particles id="particles" className={classes.particles} />
+                {(location.pathname == '/amber/login' || location.pathname == '/amber') && <Particles id="particles" className={classes.particles} />}
                 <Route path="/amber/login" component={SignIn} />
                 <Route path="/amber/" component={DashboardContainer} />
             </div>

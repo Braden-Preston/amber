@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { BrowserRouter as Router, Route, Link, Switch, Redirect, withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import { inject, observer } from 'mobx-react'
 import { compose } from 'recompose'
@@ -18,7 +19,8 @@ class OrdersContainer extends Component {
         const { dashboardStore: store, ...rest } = this.props
         return (
             <main id="Orders">
-                <Orders />
+                <Route path="/amber/orders" component={Orders} />
+                <Route path="/amber/orders:idName" render={()=> <h1>NAME</h1>} />
             </main>
         )
     }
