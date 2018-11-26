@@ -26,9 +26,7 @@ const drawerWidth = 240;
 
 const styles = theme => ({
     root: {
-        display: 'flex',
-        height: '100vh',
-        overflow: 'hidden',
+
     },
     appBar: {
         zIndex: 1201,
@@ -106,26 +104,26 @@ const styles = theme => ({
     snapshot: {
         position: 'absolute',
         left: 0,
-        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        transition: 'all 200ms linear  0ms',
         boxShadow: '5px 9px 30px 2px rgba(0,0,0,0.25)',
     },
     snapshotActive: {
         left: '-70vw',
         transform: 'scale(0.9)',
-        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) ',
+        transition: 'all 200ms linear ',
     },
     navigation: {
         position: 'absolute',
         height: '100vh',
-        right: -250,
-        width: 250,
+        right: '-70vw',
+        width: '70vw',
         // background: '#2f4156',
         boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
-        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) ',
+        transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1) ',
     },
     navigationActive: {
         right: 0,
-        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms ',
+        transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms ',
     }
 
 });
@@ -142,15 +140,11 @@ class Dashboard extends Component {
         const { classes, store, location } = this.props
         const { navigationVisible } = this.state
         return (
-            <div id="Dashboard">
+            <div id="Dashboard" className={classes.root}>
                 <Snapshot classes={classes} store={store} />
-                {store.navigationVisible && <div id="ClickAway"
-                    style={{ width: 'calc(100vw - 250px)', height: '100vh', position: 'fixed' }}
-                    onClick={() => { store.toggleBoolean("navigationVisible") }}
-                />}
-                <aside id="Naviagtion" className={classNames(classes.navigation, store.navigationVisible && classes.navigationActive)} >
-                    <NavigationLinks />
-                </aside>
+                <NavigationLinks classes={classes} store={store} />
+                {store.navigationVisible && <div id="ClickAway" style={{ width: '30vw', height: '100vh', position: 'fixed' }}
+                    onClick={() => { store.toggleBoolean("navigationVisible") }} />}
             </div>
 
             // <Zoom in>
@@ -186,7 +180,7 @@ export default compose(
     observer
 )(Dashboard)
 
-const Snapshot = observer(({classes, store}) => (
+const Snapshot = observer(({ classes, store }) => (
     <main id="Snapshot" className={classNames(classes.snapshot, store.navigationVisible && classes.snapshotActive)} >
         <Switch location={location}>
             <Route path="/amber/overview" render={() => (<h1>Overview</h1>)} />
@@ -200,17 +194,65 @@ const Snapshot = observer(({classes, store}) => (
     </main>
 ))
 
-const NavigationLinks = observer(() => (
-    <Fragment>
-        <li><Link to="/amber/overview">Overview</Link></li>
+const linkData = [
+    {
+        to: '/amber/overview',
+        label: 'Overview',
+    },
+    {
+        to: '/amber/clients',
+        label: 'Clients',
+    },
+    {
+        to: '/amber/orders',
+        label: 'Orders',
+    },
+    {
+        to: '/amber/navigate',
+        label: 'Navigate',
+    },
+    {
+        to: '/amber/services',
+        label: 'Services',
+    },
+    {
+        to: '/amber/records',
+        label: 'Records',
+    },
+    {
+        to: '/amber/budget',
+        label: 'Budget',
+    },
+    {
+        to: '/amber/settings',
+        label: 'Settings',
+    },
+]
+
+const NavigationLinks = observer(({ classes, store }) => (
+    <aside id="Naviagtion" className={classNames(classes.navigation, store.navigationVisible && classes.navigationActive)} >
+        <List component="nav">
+            {linkData.map((item, index) => (
+                <ListItem button component={Link} to={item.to}
+                    // onClick={() => { store.toggleBoolean("navigationVisible") }}
+                >
+                    <ListItemIcon>
+                        <MailIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={item.label} />
+                </ListItem>
+            ))}
+        </List>
+
+        {/* <li><Link to="/amber/overview">Overview</Link></li>
         <li><Link to="/amber/clients">Clients</Link></li>
         <li><Link to="/amber/orders">Orders</Link></li>
         <li><Link to="/amber/navigate">Navigate</Link></li>
         <li><Link to="/amber/services">Services</Link></li>
         <li><Link to="/amber/records">Records</Link></li>
         <li><Link to="/amber/budget">Budget</Link></li>
-        <li><Link to="/amber/settings">Budget</Link></li>
-    </Fragment>
+        <li><Link to="/amber/settings">Settings</Link></li> */}
+    </aside>
 ))
 
 
