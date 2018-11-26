@@ -106,8 +106,8 @@ const styles = theme => ({
     snapshot: {
         position: 'absolute',
         left: 0,
-        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 100ms',
-        border: '1px solid dodgerblue',
+        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        boxShadow: '5px 9px 30px 2px rgba(0,0,0,0.25)',
     },
     snapshotActive: {
         left: '-70vw',
@@ -119,12 +119,13 @@ const styles = theme => ({
         height: '100vh',
         right: -250,
         width: 250,
-        background: 'lightgrey',
+        // background: '#2f4156',
+        boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
         transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) ',
     },
     navigationActive: {
         right: 0,
-        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 100ms ',
+        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms ',
     }
 
 });
