@@ -7,6 +7,8 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import ColorAvatar from '../presentation/ColorAvatar';
 import { StickyContainer, Sticky } from 'react-sticky';
 import Backdrop from '../media/backdrop.png'
+import { observer } from 'mobx-react';
+import { compose } from 'recompose'
 
 const styles = theme => ({
     root: {
@@ -175,7 +177,11 @@ class Orders extends React.Component {
     }
 }
 
-export default withStyles(styles)(Orders);
+export default compose(
+    // inject('dashboardStore'),
+    withStyles(styles),
+    observer
+)(Orders);
 
 const ActionBar = ({ classes, store }) => (
     <div id="AppBar" className={classes.appBar}>
@@ -190,7 +196,7 @@ const ActionBar = ({ classes, store }) => (
                     <MenuIcon />
                 </IconButton>
             </Toolbar>
-        </AppBar> 
+        </AppBar>
     </div>
 )
 

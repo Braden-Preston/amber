@@ -159,14 +159,7 @@ class Dashboard extends Component {
                     onClick={() => { store.toggleBoolean("navigationVisible") }}
                 />}
                 <aside id="Naviagtion" className={classNames(classes.navigation, store.navigationVisible && classes.navigationActive)} >
-                    <li><Link to="/amber/overview">Overview</Link></li>
-                    <li><Link to="/amber/clients">Clients</Link></li>
-                    <li><Link to="/amber/orders">Orders</Link></li>
-                    <li><Link to="/amber/navigate">Navigate</Link></li>
-                    <li><Link to="/amber/services">Services</Link></li>
-                    <li><Link to="/amber/records">Records</Link></li>
-                    <li><Link to="/amber/budget">Budget</Link></li>
-                    <li><Link to="/amber/settings">Budget</Link></li>
+                    <NavigationLinks />
                 </aside>
             </div>
 
@@ -202,6 +195,19 @@ export default compose(
     withStyles(styles),
     observer
 )(Dashboard)
+
+const NavigationLinks = observer(() => (
+    <Fragment>
+        <li><Link to="/amber/overview">Overview</Link></li>
+        <li><Link to="/amber/clients">Clients</Link></li>
+        <li><Link to="/amber/orders">Orders</Link></li>
+        <li><Link to="/amber/navigate">Navigate</Link></li>
+        <li><Link to="/amber/services">Services</Link></li>
+        <li><Link to="/amber/records">Records</Link></li>
+        <li><Link to="/amber/budget">Budget</Link></li>
+        <li><Link to="/amber/settings">Budget</Link></li>
+    </Fragment>
+))
 
 
 // import React, { Fragment } from 'react'
