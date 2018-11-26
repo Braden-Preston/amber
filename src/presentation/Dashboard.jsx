@@ -143,17 +143,7 @@ class Dashboard extends Component {
         const { navigationVisible } = this.state
         return (
             <div id="Dashboard">
-                <main id="Snapshot" className={classNames(classes.snapshot, store.navigationVisible && classes.snapshotActive)} >
-                    <Switch location={location}>
-                        <Route path="/amber/overview" render={() => (<h1>Overview</h1>)} />
-                        <Route path="/amber/clients" render={() => (<h1>Clients</h1>)} />
-                        <Route path="/amber/orders" component={OrdersContainer} />
-                        <Route path="/amber/navigate" render={() => (<h1>Navigate</h1>)} />
-                        <Route path="/amber/services" render={() => (<h1>Services</h1>)} />
-                        <Route path="/amber/records" render={() => (<h1>Records</h1>)} />
-                        <Route path="/amber/budget" render={() => (<h1>Budget</h1>)} />
-                    </Switch>
-                </main>
+                <Snapshot classes={classes} store={store} />
                 {store.navigationVisible && <div id="ClickAway"
                     style={{ width: 'calc(100vw - 250px)', height: '100vh', position: 'fixed' }}
                     onClick={() => { store.toggleBoolean("navigationVisible") }}
@@ -195,6 +185,20 @@ export default compose(
     withStyles(styles),
     observer
 )(Dashboard)
+
+const Snapshot = observer(({classes, store}) => (
+    <main id="Snapshot" className={classNames(classes.snapshot, store.navigationVisible && classes.snapshotActive)} >
+        <Switch location={location}>
+            <Route path="/amber/overview" render={() => (<h1>Overview</h1>)} />
+            <Route path="/amber/clients" render={() => (<h1>Clients</h1>)} />
+            <Route path="/amber/orders" component={OrdersContainer} />
+            <Route path="/amber/navigate" render={() => (<h1>Navigate</h1>)} />
+            <Route path="/amber/services" render={() => (<h1>Services</h1>)} />
+            <Route path="/amber/records" render={() => (<h1>Records</h1>)} />
+            <Route path="/amber/budget" render={() => (<h1>Budget</h1>)} />
+        </Switch>
+    </main>
+))
 
 const NavigationLinks = observer(() => (
     <Fragment>
