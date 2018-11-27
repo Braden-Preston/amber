@@ -255,6 +255,10 @@ const linkData = [
         to: '/amber/settings',
         label: 'Settings',
     },
+    {
+        to: '/amber/orders/JlW4zXqQp8Ye5ckNtI4T',
+        label: 'JlW4zXqQp8Ye5ckNtI4T',
+    },
 ]
 
 const Navigation = ({ classes, store }) => (
@@ -277,7 +281,7 @@ const NavigationLinks = withRouter(
             {linkData.map((item, index) => (
                 <ListItem button component={Link} to={item.to} classes={{ selected: classes.listItemSelected }} selected={item.to == location.pathname}
                     onClick={() => {
-                        // store.toggleBoolean("navigationVisible")
+                        store.toggleBoolean("navigationVisible")
                     }} >
                     <ListItemIcon className={classes.listItemIcon}>
                         <MailIcon />

@@ -1,14 +1,45 @@
 import { db } from './firebase';
 
-// User API
+// export const getClient = async (id) => {
+//     console.log(id)
+//     const x = await db.collection('clients').doc(id).get()
+//         .then((documentSnapshot) => {
+//             console.log(documentSnapshot.data())
+//         })
+// }
 
-export const doCreateUser = (id, username, email) =>
-  db.ref(`users/${id}`).set({
-    username,
-    email,
-  });
+export const getClient = async (id) => {
+    console.log(id)
+    return new Promise((resolve, reject) => {
+        db.collection('clients').doc(id).get()
+            .then((documentSnapshot) => {
+                const data = documentSnapshot.data()
+                data
+                    ?
+                    resolve(data) :
+                    reject("Document Snapshot is Null")
+            })
+    })
+}
 
-export const onceGetUsers = () =>
-  db.ref('users').once('value');
+// export const getClient = new Promise((resolve, reject) => {
+//     db.collection('public').doc('wp-credentials').get()
+//         .then((documentSnapshot) => {
+//             const data = documentSnapshot.data()
+//             data
+//                 ?
+//                 resolve(data) :
+//                 reject("Document Snapshot is Null")
+//         })
+// })
 
-// Other Entity APIs ...
+// export const getClient = new Promise((resolve, reject) => {
+//     db.collection('public').doc('wp-credentials').get()
+//         .then((documentSnapshot) => {
+//             const data = documentSnapshot.data()
+//             data
+//                 ?
+//                 resolve(data) :
+//                 reject("Document Snapshot is Null")
+//         })
+// })

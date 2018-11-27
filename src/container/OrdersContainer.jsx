@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Link, Switch, Redirect, withRouter } fr
 import { withStyles } from '@material-ui/core/styles'
 import { inject, observer } from 'mobx-react'
 import { compose } from 'recompose'
-import Orders from './Orders';
+import Orders from '../presentation/Orders';
+import OrdersPage from '../presentation/OrdersPage';
 
 const styles = {
     root: {
@@ -19,9 +20,12 @@ class OrdersContainer extends Component {
         const { dashboardStore: store, ...rest } = this.props
         return (
             <main id="Orders">
-                <Orders store={store} />
+                {/* <Orders store={store} /> */}
                 {/* <Route path="/amber/orders" component={Orders} /> */}
-                {/* <Route path="/amber/orders:idName" render={()=> <h1>NAME</h1>} /> */}
+                <Switch>
+                    <Route exact path="/amber/orders/:id" render={(props) => <OrdersPage store={store} />} />
+                    <Route exact path="/amber/orders" render={(props) => <Orders store={store} />} />
+                </Switch>
             </main>
         )
     }

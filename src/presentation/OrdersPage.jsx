@@ -1,14 +1,14 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography, InputBase, Paper } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, InputBase } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import ColorAvatar from '../presentation/ColorAvatar';
-import { StickyContainer, Sticky } from 'react-sticky';
-import Backdrop from '../media/backdrop.png'
 import { observer } from 'mobx-react';
 import { compose } from 'recompose'
+import { withRouter } from 'react-router-dom'
+
+import { db } from '../firebase'
 
 const styles = theme => ({
     root: {
@@ -157,21 +157,29 @@ const styles = theme => ({
 });
 
 class Orders extends React.Component {
+    state = {
+        customerInfo: {}
+    }
+
+    componentDidMount = async () => {
+        const ID = this.props.match.params.id
+        const customerInfo = await db.getClient(ID)
+        this.setState({customerInfo})
+    }
+
     render() {
-        const { classes, store } = this.props
-        console.log(this.props)
-        console.log(store)
+        const { classes, store, match } = this.props
+        const { customerInfo: customer } = this.state
+        console.log(customer)
         return (
             <div id="Orders" className={classes.root}>
-                {/* <div id="Flex" className={classes.flex}> */}
-                <ActionBar classes={classes} store={store}/>
-                {/* <div id="Flex" className={classes.flex}> */}
-                <div className={classes.panel}>
-                    <Canvas classes={classes} />
-                    <SliceContainer classes={classes} />
-                </div>
-                {/* </div> */}
-                {/* </div> */}
+                <ActionBar classes={classes} store={store} />
+                <h1>{`Customer ID: ${match.params.id}`}</h1>
+                <h2>{customer.firstname}</h2>
+                <h2>{customer.lastname}</h2>
+                <h3>{customer.date_created}</h3>
+                <p>Invoices [ ]: </p>
+                <h3>{customer.orders}</h3>
             </div>
         )
     }
@@ -181,7 +189,7 @@ export default compose(
     // inject('dashboardStore'),
     withStyles(styles),
     observer
-)(Orders);
+)(withRouter(Orders));
 
 const ActionBar = ({ classes, store }) => (
     <div id="AppBar" className={classes.appBar}>
@@ -199,35 +207,4 @@ const ActionBar = ({ classes, store }) => (
         </AppBar>
     </div>
 )
-
-const Canvas = ({ classes }) => (
-    <div className={classes.canvas}>
-        {/* <Typography variant="h4" color="textSecondary" >Orders</Typography> */}
-        <img classname={classes.svg} src={Backdrop} />
-    </div>
-)
-
-const SliceContainer = ({ classes }) => (
-    <div className={classes.sliceContainer}>
-        <SliceGroup classes={classes} />
-        <SliceGroup classes={classes} />
-        <SliceGroup classes={classes} />
-        <SliceGroup classes={classes} />
-        <SliceGroup classes={classes} />
-    </div>
-)
-
-const SliceGroup = ({ classes }) => (
-    <Fragment>
-        <p>This Week</p>
-        <Slice classes={classes} />
-    </Fragment>
-)
-
-const Slice = ({ classes }) => (
-    <Paper className={classes.paper} >
-        <p><ColorAvatar initials="BP" /> Order 1 </p>
-    </Paper >
-)
-
 

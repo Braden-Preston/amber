@@ -5,7 +5,7 @@ class DashboardStore {
       this.rootStore = rootStore;
     }
 
-    navigationVisible = true
+    navigationVisible = false
 
     toggleBoolean = property => {
         this[property] = !this[property]
