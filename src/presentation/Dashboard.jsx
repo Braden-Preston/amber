@@ -21,6 +21,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import ClientTable from './ClientTable';
 
 import OrdersContainer from '../container/OrdersContainer';
+import Icon from '../media/firebase_icon.png'
 
 const drawerWidth = 240;
 
@@ -104,13 +105,13 @@ const styles = theme => ({
     snapshot: {
         position: 'absolute',
         left: 0,
-        transition: 'all 200ms linear  0ms',
+        transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)  0ms',
         boxShadow: '5px 9px 30px 2px rgba(0,0,0,0.25)',
     },
     snapshotActive: {
         left: '-70vw',
         transform: 'scale(0.9)',
-        transition: 'all 200ms linear ',
+        transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1) ',
     },
     navigation: {
         position: 'absolute',
@@ -118,13 +119,40 @@ const styles = theme => ({
         right: '-70vw',
         width: '70vw',
         // background: '#2f4156',
-        boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
+        // boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
         transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1) ',
     },
     navigationActive: {
         right: 0,
         transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms ',
-    }
+    },
+
+    navBadge: {
+        // background: theme.palette.secondary.main,
+        // border: '1px solid black', 
+        boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
+        marginTop: '2.5vh',
+        height: 'calc((56px * 0.9) + 5vh)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    listItem: {
+        // color: theme.palette.primary.contrastText,
+        color: 'white !important',
+    },
+    listItemSelected: {
+        borderLeft: `4px solid ${theme.palette.secondary.main}`,
+    },
+    listItemText: {
+        // color: theme.palette.primary.contrastText,
+        color: 'white !important',
+    },
+    listItemIcon: {
+        // color: theme.palette.primary.contrastText,
+        color: 'white !important',
+    },
 
 });
 
@@ -142,7 +170,7 @@ class Dashboard extends Component {
         return (
             <div id="Dashboard" className={classes.root}>
                 <Snapshot classes={classes} store={store} />
-                <NavigationLinks classes={classes} store={store} />
+                <Navigation classes={classes} store={store} />
                 {store.navigationVisible && <div id="ClickAway" style={{ width: '30vw', height: '100vh', position: 'fixed' }}
                     onClick={() => { store.toggleBoolean("navigationVisible") }} />}
             </div>
@@ -229,31 +257,38 @@ const linkData = [
     },
 ]
 
-const NavigationLinks = observer(({ classes, store }) => (
+const Navigation = ({ classes, store }) => (
     <aside id="Naviagtion" className={classNames(classes.navigation, store.navigationVisible && classes.navigationActive)} >
-        <List component="nav">
+        <NavigationBadge classes={classes} store={store} />
+        <NavigationLinks classes={classes} store={store} />
+    </aside>
+)
+
+const NavigationBadge = ({ classes, store }) => (
+    <aside id="Naviagtion" className={classes.navBadge} >
+        <img src={Icon} style={{ height: 40, marginRight: 16 }} />
+        <Typography variant="headline" style={{ color: '#fff' }}>Amber</Typography>
+    </aside>
+)
+
+const NavigationLinks = withRouter(
+    observer(({ classes, store, location }) => (
+        <List>
             {linkData.map((item, index) => (
-                <ListItem button component={Link} to={item.to}
-                    // onClick={() => { store.toggleBoolean("navigationVisible") }}
-                >
-                    <ListItemIcon>
+                <ListItem button component={Link} to={item.to} classes={{ selected: classes.listItemSelected }} selected={item.to == location.pathname}
+                    onClick={() => {
+                        // store.toggleBoolean("navigationVisible")
+                    }} >
+                    <ListItemIcon className={classes.listItemIcon}>
                         <MailIcon />
                     </ListItemIcon>
-                    <ListItemText primary={item.label} />
+                    <ListItemText primary={item.label} className={classes.listItemText} />
                 </ListItem>
-            ))}
+            )
+            )}
         </List>
-
-        {/* <li><Link to="/amber/overview">Overview</Link></li>
-        <li><Link to="/amber/clients">Clients</Link></li>
-        <li><Link to="/amber/orders">Orders</Link></li>
-        <li><Link to="/amber/navigate">Navigate</Link></li>
-        <li><Link to="/amber/services">Services</Link></li>
-        <li><Link to="/amber/records">Records</Link></li>
-        <li><Link to="/amber/budget">Budget</Link></li>
-        <li><Link to="/amber/settings">Settings</Link></li> */}
-    </aside>
-))
+    ))
+)
 
 
 // import React, { Fragment } from 'react'

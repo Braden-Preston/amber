@@ -27,7 +27,6 @@ const styles = {
 class Amber extends Component {
     render() {
         const { classes, match, location } = this.props
-        console.log(location)
         return (
             <div className={classes.root}>
                 {(location.pathname == '/amber/login' || location.pathname == '/amber') && <Particles id="particles" className={classes.particles} />}
