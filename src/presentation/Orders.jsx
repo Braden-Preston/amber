@@ -24,7 +24,6 @@ const styles = theme => ({
     },
     appBar: {
         display: 'flex',
-        height: 56,
     },
     section: {
         paddingRight: theme.spacing.unit * 2,
@@ -39,6 +38,9 @@ const styles = theme => ({
         display: 'flex',
         zIndex: 1,
         flex: 1,
+        '&:nth-child(1)': {
+            borderRadius: 50,
+        }
     },
     canvas: {
         background: 'rgba(0,140,255,0.7)',
@@ -171,7 +173,7 @@ class Orders extends React.Component {
                 <ActionBar classes={classes} store={store} />
                 <div className={classes.section}>
                     <Canvas classes={classes} />
-                    <Grid container direction="column" justify="flex-start" alignItems="center"style={{border: '0px solid red'}}>
+                    <Grid container direction="column" justify="flex-start" alignItems="center"style={{border: '0px solid red'}} className={classes.panelArea}>
                         <PanelGroup label={'Today'} id={'Today'} />
                         <PanelGroup label={'Upcoming'} id={'Upcoming'} />
                         <PanelGroup label={'Last Week'} id={'Week'} />
