@@ -19,6 +19,7 @@ const styles = theme => ({
         width: '100vw',
         display: 'flex',
         background: theme.palette.secondary.main,
+        background: '#5d5bc0',
         zIndex: 1,
     },
     paper: {

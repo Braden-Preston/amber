@@ -8,6 +8,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import ColorAvatar from '../presentation/ColorAvatar';
 import { StickyContainer, Sticky } from 'react-sticky';
 import Backdrop from '../media/backdrop.png'
+import Backdrop2 from '../media/backdrop2.png'
 import { observer } from 'mobx-react';
 import { compose } from 'recompose'
 import PanelGroup from '../presentation/PanelGroup'
@@ -23,11 +24,15 @@ const styles = theme => ({
         zIndex: 1,
     },
     appBar: {
-        display: 'flex',
+        // display: '',
+        position: 'fixed',
+        zIndex: 9999999,
+        width: '100%',
+        boxShadow: 'none',
     },
     section: {
-        paddingRight: theme.spacing.unit * 2,
-        paddingLeft: theme.spacing.unit * 2,
+        // paddingRight: theme.spacing.unit * 2,
+        // paddingLeft: theme.spacing.unit * 2,
         justifyContent: 'center',
         alignItems: 'flex-start',
         background: '#f7f7f7',
@@ -38,7 +43,7 @@ const styles = theme => ({
         display: 'flex',
         zIndex: 1,
         flex: 1,
-        '&:nth-child(1)': {
+        '& :nth-child(2)': {
             borderRadius: 50,
         }
     },
@@ -46,9 +51,10 @@ const styles = theme => ({
         background: 'rgba(0,140,255,0.7)',
         flexDirection: 'column',
         display: 'flex',
-        height: 250,
-        zIndex: 1,
-        flex: 1,
+        // zIndex: 1,
+        // flex: 1,
+        height: 300,
+        overflow: 'hidden',
     },
     sliceContainer: {
 
@@ -76,7 +82,8 @@ const styles = theme => ({
         },
     },
     toolbar: {
-        background: theme.palette.secondary.main
+        background: 'transparent',
+        boxShadow: 'none',
     },
     search: {
         position: 'relative',
@@ -144,6 +151,7 @@ const styles = theme => ({
         width: 'calc(100vw - 32px)',
     },
     svg: {
+        width: '100%'
         // position: 'absolute',
         // top: '50%',
         // transform: 'translateX(-50%)',
@@ -193,7 +201,7 @@ export default compose(
 
 const ActionBar = ({ classes, store }) => (
     <div id="AppBar" className={classes.appBar}>
-        <AppBar position="static" color="secondary">
+        <AppBar position="static" color="secondary" className={classes.toolbar}>
             <Toolbar className={classes.toolbar}>
                 <div className={classes.grow} />
                 <div className={classes.search}>
@@ -211,7 +219,7 @@ const ActionBar = ({ classes, store }) => (
 const Canvas = ({ classes }) => (
     <div className={classes.canvas}>
         {/* <Typography variant="h4" color="textSecondary" >Orders</Typography> */}
-        <img classname={classes.svg} src={Backdrop} />
+        <img classname={classes.svg} src={Backdrop2} />
     </div>
 )
 
