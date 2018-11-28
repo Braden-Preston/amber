@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography, InputBase, Paper } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, InputBase, Paper, Grid } from '@material-ui/core';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect, withRouter } from 'react-router-dom'
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -10,6 +10,7 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import Backdrop from '../media/backdrop.png'
 import { observer } from 'mobx-react';
 import { compose } from 'recompose'
+import PanelGroup from '../presentation/PanelGroup'
 
 const styles = theme => ({
     root: {
@@ -25,8 +26,12 @@ const styles = theme => ({
         display: 'flex',
         height: 56,
     },
-    panel: {
+    section: {
+        paddingRight: theme.spacing.unit * 2,
+        paddingLeft: theme.spacing.unit * 2,
         justifyContent: 'center',
+        alignItems: 'flex-start',
+        background: '#f7f7f7',
         flexDirection: 'row',
         overflowX: 'hidden',
         overflowY: 'scroll',
@@ -163,15 +168,16 @@ class Orders extends React.Component {
         console.log(this.props)
         return (
             <div id="Orders" className={classes.root}>
-                {/* <div id="Flex" className={classes.flex}> */}
-                <ActionBar classes={classes} store={store}/>
-                {/* <div id="Flex" className={classes.flex}> */}
-                <div className={classes.panel}>
+                <ActionBar classes={classes} store={store} />
+                <div className={classes.section}>
                     <Canvas classes={classes} />
-                    <SliceContainer classes={classes} />
+                    <Grid container direction="column" justify="flex-start" alignItems="center"style={{border: '0px solid red'}}>
+                        <PanelGroup label={'Today'} id={'Today'} />
+                        <PanelGroup label={'Upcoming'} id={'Upcoming'} />
+                        <PanelGroup label={'Last Week'} id={'Week'} />
+                        <PanelGroup label={'This Month'} id={'Month'} />
+                    </Grid>
                 </div>
-                {/* </div> */}
-                {/* </div> */}
             </div>
         )
     }
@@ -180,7 +186,7 @@ class Orders extends React.Component {
 export default compose(
     // inject('dashboardStore'),
     withStyles(styles),
-    observer
+
 )(Orders);
 
 const ActionBar = ({ classes, store }) => (
@@ -207,28 +213,29 @@ const Canvas = ({ classes }) => (
     </div>
 )
 
-const SliceContainer = ({ classes }) => (
-    <div className={classes.sliceContainer}>
-        <SliceGroup classes={classes} />
-        <SliceGroup classes={classes} />
-        <SliceGroup classes={classes} />
-        <SliceGroup classes={classes} />
-        <SliceGroup classes={classes} />
-    </div>
-)
+// const SliceContainer = ({ classes }) => (
+//     <div className={classes.sliceContainer}>
+//         <SliceGroup classes={classes} />
+//         <SliceGroup classes={classes} />
+//         <SliceGroup classes={classes} />
+//         <SliceGroup classes={classes} />
+//         <SliceGroup classes={classes} />
+//     </div>
+// )
 
-const SliceGroup = ({ classes }) => (
-    <Fragment>
-        <p>This Week</p>
-        <Slice classes={classes} />
-    </Fragment>
-)
+// const SliceGroup = ({ classes }) => (
+//     <Fragment>
+//         <p>This Week</p>
+//         <Slice classes={classes} />
+//     </Fragment>
+// )
 
-const Slice = withRouter(({ classes, history }) => (
-    <Paper className={classes.paper} >
-        <p><ColorAvatar initials="BP" /> Order 1 </p>
-        <Link to='/amber/orders/JlW4zXqQp8Ye5ckNtI4T'>JlW4zXqQp8Ye5ckNtI4T</Link>
-    </Paper >
-))
+// const Slice = ({ classes, history }) => (
+//     <Paper className={classes.paper} >
+//         <p><ColorAvatar initials="BP" /> Order 1 </p>
+//         <li><Link to="/amber/login">Overview</Link></li>
+//         <Link to='/amber/orders/JlW4zXqQp8Ye5ckNtI4T'>JlW4zXqQp8Ye5ckNtI4T</Link>
+//     </Paper >
+// )
 
 

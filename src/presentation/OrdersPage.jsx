@@ -1,12 +1,12 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, InputBase } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, InputBase, Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { observer } from 'mobx-react';
 import { compose } from 'recompose'
-import { withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Switch, Redirect, withRouter } from 'react-router-dom'
 
 import { db } from '../firebase'
 
@@ -174,6 +174,7 @@ class Orders extends React.Component {
         return (
             <div id="Orders" className={classes.root}>
                 <ActionBar classes={classes} store={store} />
+                <Button button component={Link} to={'/amber/orders'} color="secondary" variant="outlined" >{"<-- Back to Orders"}</Button>
                 <h1>{`Customer ID: ${match.params.id}`}</h1>
                 <h2>{customer.firstname}</h2>
                 <h2>{customer.lastname}</h2>

@@ -208,7 +208,7 @@ export default compose(
     observer
 )(Dashboard)
 
-const Snapshot = observer(({ classes, store }) => (
+const Snapshot = ({ classes, store, location }) => (
     <main id="Snapshot" className={classNames(classes.snapshot, store.navigationVisible && classes.snapshotActive)} >
         <Switch location={location}>
             <Route path="/amber/overview" render={() => (<h1>Overview</h1>)} />
@@ -220,7 +220,7 @@ const Snapshot = observer(({ classes, store }) => (
             <Route path="/amber/budget" render={() => (<h1>Budget</h1>)} />
         </Switch>
     </main>
-))
+)
 
 const linkData = [
     {
@@ -254,10 +254,6 @@ const linkData = [
     {
         to: '/amber/settings',
         label: 'Settings',
-    },
-    {
-        to: '/amber/orders/JlW4zXqQp8Ye5ckNtI4T',
-        label: 'JlW4zXqQp8Ye5ckNtI4T',
     },
 ]
 

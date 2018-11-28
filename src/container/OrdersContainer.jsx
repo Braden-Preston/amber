@@ -17,14 +17,15 @@ class OrdersContainer extends Component {
         // property
     }
     render() {
-        const { dashboardStore: store, ...rest } = this.props
+        const { dashboardStore: store, location, ...rest } = this.props
+        console.log(this.props)
         return (
             <main id="Orders">
                 {/* <Orders store={store} /> */}
                 {/* <Route path="/amber/orders" component={Orders} /> */}
-                <Switch>
-                    <Route exact path="/amber/orders/:id" render={(props) => <OrdersPage store={store} />} />
+                <Switch location={location}>
                     <Route exact path="/amber/orders" render={(props) => <Orders store={store} />} />
+                    <Route exact path="/amber/orders/:id" render={(props) => <OrdersPage store={store} />} />
                 </Switch>
             </main>
         )
